@@ -816,8 +816,8 @@ That distinction matters in stats + visualization."
 
 ```{r}
 #| label: fig-chatGPTDetailedPlot
-#| fig-cap: "Graphs of annual travelers over time for six major airports between 2020 and 2025, grouped by their continent"
-#| fig-alt: "Scatterplot with connecting lines for two airports in each of Asia, Europe, and North America shows a general upwards trend in annual travelers (millions) between 2020 and 2025"
+#| fig-cap: "Line plot shows the control group had a higher average calcium level each year in the experiment"
+#| fig-alt: "Line plot shows the control group had a higher average calcium level each year in the experiment"
 #| fig-pos: "H"
 #| fig-width: 8
 #| echo: false
