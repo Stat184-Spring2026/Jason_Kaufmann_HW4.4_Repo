@@ -635,13 +635,13 @@ These figures illustrate how the plotting of random ordered pairs can be used to
 
 ## Planning and Prompting GenAI Tools
 
-The goal of this section is to evaluate how the quality of code written by GenAI tools differ based on the quality of the prompt they receive. For this investigation, I focused on a study that tracked women's calcium levels over the course of four years. Each woman was placed in one of two treatment groups: she either participated in a regimented diet/exercise program or did not receive any special treatment. I provided OpenAI's ChatGPT with a detailed prompt of the relevant goals, needs, and necessary steps to create an informative data visualization as well as the untidied data from this experiment.
+The goal of this section is to evaluate how the quality of code written by GenAI tools differ based on the quality of the prompt they receive. For this investigation, I focused on a study that tracked women's calcium levels over the course of four years. Each woman was placed in one of two treatment groups: she either participated in a regimented diet/exercise program or did not receive any special treatment. I provided OpenAI's ChatGPT with a detailed prompt of the relevant goals, needs, and necessary steps to create an informative data visualization.
 
 ### A Detailed Plan for Data Wrangling and Visualization
 
 Below is the exact prompt that I provided to ChatGPT:
 
-"Goal: To wrangle the data from the calcium csv into tidy form and create an informative data visualization that shows how calcium levels between both treatment groups varied over the experiment’s duration
+Goal: To wrangle the data from the calcium csv into tidy form and create an informative data visualization that shows how calcium levels between both treatment groups varied over the experiment’s duration
 
 Needs:
 
@@ -691,11 +691,128 @@ Steps:
 
 8.  Debug if any errors came up
 
-9.  Generate Alt Text and a long description for the plot"
+9.  Generate Alt Text and a long description for the plot
 
 ### Response and Plot Generated from the Detailed Prompt
 
-When provided with a detailed prompt, ChatGPT produced a surprisingly high-quality visual aide (See @fig-chatGPTDetailedPlot). See the GenAI Code Appendix in Section 5.2 for its full response.
+When provided with a detailed prompt, ChatGPT produced a surprisingly high-quality visual aide (See @fig-chatGPTDetailedPlot). The response it provided is included verbatim below:
+
+"Good—this is a very solid plan already. I’ll tighten it into something you can directly execute in **R (tidyverse style)**.
+
+**🔧 Refined Plan (What you actually need to do)**
+
+Right now your CSV has **two groups side-by-side**:
+
+-   y0–y3 → likely **null/control group**
+
+-   y0.1–y3.1 → likely **experimental group**
+
+Each row = a woman\
+Each column = calcium level at a specific year
+
+👉 But this is **wide format**, and you need **tidy (long) format**.
+
+**🧱 Step 1: Set up your R Project + Script**
+
+You already outlined this well:
+
+-   Create R Project
+
+-   Create script (e.g., calcium_analysis.R)
+
+-   Load packages:
+
+library(tidyverse)
+
+**📥 Step 2: Load the Data**
+
+calcium \<- read_csv("calcium.csv")
+
+**🧹 Step 3: Clean + Rename Columns**
+
+Right now your columns look like:
+
+y0, y1, y2, y3, y0.1, y1.1, y2.1, y3.1
+
+Rename them so they clearly indicate:
+
+-   **year**
+
+-   **treatment group**
+
+**🔄 Step 4: Add an ID Column**
+
+Each woman should be identifiable:
+
+calcium \<- calcium %\>%
+
+ mutate(id = row_number())
+
+**🔁 Step 5: Pivot to Tidy Format**
+
+This is the **most important step**.
+
+calcium_long \<- calcium %\>%
+
+**🧠 Step 6: Clean Variables**
+
+Make them readable:
+
+calcium_long \<- calcium_long %\>%
+
+**📊 Step 7: Create Visualization**
+
+You want:
+
+-   comparison over time
+
+-   grouped by treatment
+
+-   clear trend
+
+**Best choice: line plot + points**
+
+ggplot(calcium_long, aes(x = year, y = calcium, color = treatment)) +
+
+**🎯 Why This Works (Important Concept)**
+
+-   pivot_longer() → makes data tidy
+
+-   stat_summary(mean) → shows **group trends instead of noisy individual lines**
+
+-   color → distinguishes treatment groups clearly
+
+**🛠️ Step 8: Debug Checklist**
+
+If something breaks, check:
+
+-   ❌ Column names not matching → use colnames(calcium)
+
+-   ❌ y0.1 issues → must use backticks (y0.1)
+
+-   ❌ plot looks messy → you forgot stat_summary
+
+**♿ Step 9: Alt Text**
+
+**Short alt text:**
+
+Line graph showing average calcium levels over four years for control and experimental groups, with the experimental group generally maintaining higher calcium levels.
+
+**📖 Step 10: Long Description**
+
+This plot displays the average calcium levels of women over four years in a study comparing a control (null) group and an experimental treatment group. The x-axis represents time in years (0 through 3), and the y-axis shows calcium levels. Each group is represented by a distinct colored line with points marking yearly averages. The experimental group consistently shows slightly higher calcium levels than the control group, suggesting a potential positive effect of the treatment over time.
+
+**⚠️ One Small Critique of Your Original Plan**
+
+You said:
+
+“Each case is a woman”
+
+That’s **true initially**, but after tidying:
+
+👉 Each case becomes **one observation per woman per year**
+
+That distinction matters in stats + visualization."
 
 ```{r}
 #| label: fig-chatGPTDetailedPlot
@@ -818,7 +935,43 @@ calcium_plot
 
 ### Response and Plot from the Generic Prompt
 
-The plot above stands in stark contrast to the data visualization created by ChatGPT when given a generic prompt (See @fig-genericChatGPT). The exact prompt provided was "Create a data visualization for these data. Calcium.csv" See the GenAI Code Appendix in Section 5.2 for the full generic response.
+The plot above stands in stark contrast to the data visualization created by ChatGPT when given a generic prompt (See @fig-genericChatGPT). The exact prompt provided was "Create a data visualization for these data. Calcium.csv" The response is included verbatim below, along with the resulting data plot:
+
+I created a visualization showing the **average value of each column** in your dataset.
+
+**What this shows:**
+
+-   Each point represents the **mean (average)** of one column (y0, y1, y2, y3, etc.).
+
+-   You can quickly compare which variables tend to have higher or lower values overall.
+
+-   For example, some columns cluster around \~70–73, while others drop closer to \~65.
+
+If you want something more insightful, I can also create:
+
+-   Boxplots (to show spread and outliers)
+
+-   Time series plots (if rows represent time/order)
+
+-   Correlation heatmaps
+
+-   Side-by-side comparisons (e.g., y0 vs y0.1)
+
+Just tell me 👍
+
+Prompt: What is your version information?
+
+You’re chatting with **ChatGPT based on the GPT-5.3 architecture**.
+
+**Key details:**
+
+-   **Model**: GPT-5.3
+
+-   **Knowledge cutoff**: August 2025
+
+-   **Current date (system)**: March 31, 2026
+
+If you need more technical details (capabilities, differences vs GPT-4/5, etc.), just let me know 👍
 
 ![The line plot created by ChatGPT when given a generic prompt](images/genericChatGPTPlot.png){#fig-genericChatGPT fig-alt="A line plot showing calcium levels in various years that does not show time or the corresponding treatment group."}
 
