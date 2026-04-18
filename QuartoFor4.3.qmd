@@ -333,6 +333,7 @@ ggplot( # Create the plot's frame
   theme(
     legend.position = "bottom" # Align the legend to the right of the facets
   )
+
 ```
 
 @fig-airportTravelers suggests that the rapid increase in each airport's annual travelers after the pandemic is not representative of its future growth. The airports all saw a large increase in annual travelers between 2021 and 2023 that has slowed growth in 2024 and 2025. So, despite extreme maximum and minimum values, the plot suggests that airports will see slower growth in future years as the effect of COVID-19 lessens. Although the curves for all six airlines have similar shapes, the airports in North America had the most pronounced rebound in recent years, suggesting that COVID-19 may have had a larger impact on American air travel than other nations.
@@ -627,6 +628,7 @@ plot10
 plot100
 plot1000
 plot10000
+
 ```
 
 ### Interpreting the Plots
@@ -931,6 +933,7 @@ calcium_plot <- ggplot(
 # Render the plot
 # -------------------------
 calcium_plot
+
 ```
 
 ### Response and Plot from the Generic Prompt
