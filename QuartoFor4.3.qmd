@@ -635,13 +635,13 @@ These figures illustrate how the plotting of random ordered pairs can be used to
 
 ## Planning and Prompting GenAI Tools
 
-The goal of this section is to evaluate how the quality of code written by GenAI tools differ based on the quality of the prompt they receive. For this investigation, I focused on a study that tracked women's calcium levels over the course of four years. Each woman was placed in one of two treatment groups: she either participated in a regimented diet/exercise program or did not receive any special treatment. I provided OpenAI's ChatGPT with a detailed prompt of the relevant goals, needs, and necessary steps to create an informative data visualization.
+The goal of this section is to evaluate how the quality of code written by GenAI tools differ based on the quality of the prompt they receive. For this investigation, I focused on a study that tracked women's calcium levels over the course of four years. Each woman was placed in one of two treatment groups: she either participated in a regimented diet/exercise program or did not receive any special treatment. I provided OpenAI's ChatGPT with a detailed prompt of the relevant goals, needs, and necessary steps to create an informative data visualization as well as the untidied data from this experiment.
 
 ### A Detailed Plan for Data Wrangling and Visualization
 
 Below is the exact prompt that I provided to ChatGPT:
 
-Goal: To wrangle the data from the calcium csv into tidy form and create an informative data visualization that shows how calcium levels between both treatment groups varied over the experiment’s duration
+"Goal: To wrangle the data from the calcium csv into tidy form and create an informative data visualization that shows how calcium levels between both treatment groups varied over the experiment’s duration
 
 Needs:
 
@@ -691,7 +691,7 @@ Steps:
 
 8.  Debug if any errors came up
 
-9.  Generate Alt Text and a long description for the plot
+9.  Generate Alt Text and a long description for the plot"
 
 ### Response and Plot Generated from the Detailed Prompt
 
