@@ -16,7 +16,7 @@ Some coordinates were also randomly generated to execute Monte Carlo Integration
 
 ## Current Plan
 
-As mentioned above, the main goals of the project are to provide insight into how passenger traffic at major airports has changed in recent years, perform Monte Carlo integration, and show how the quality of GenAI's response varies based on the prompt it receives. For the full plan of goals, needs, and steps, please se _____.
+As mentioned above, the main goals of the project are to provide insight into how passenger traffic at major airports has changed in recent years, perform Monte Carlo integration, and show how the quality of GenAI's response varies based on the prompt it receives. For the full plan of goals, needs, and steps, please see [this file]([url](https://docs.google.com/document/d/1AP62OhW8x2Vw_QXJYWdAqB6aE-KyvPJcrjXNUipMOGQ/edit?usp=sharing)).
 ## Repo Structure
 
 This repo is fairly simple and traditional in its structure. All files are housed in the main branch with a folder included that houses all relevant images.
